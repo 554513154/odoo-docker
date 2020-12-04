@@ -49,6 +49,7 @@ ADD sources/pip.txt /opt/sources/pip.txt
 RUN pip3 install -r /opt/sources/pip.txt
 
 # Install postgresql-client
+RUN apt update && apt install lsb-release
 RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 RUN apt update && apt install postgresql-client
