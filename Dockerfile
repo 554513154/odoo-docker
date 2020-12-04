@@ -48,6 +48,11 @@ RUN pip3 install -r /opt/odoo/sources/odoo/requirements.txt
 ADD sources/pip.txt /opt/sources/pip.txt
 RUN pip3 install -r /opt/sources/pip.txt
 
+# Install postgresql-client
+RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN apt update && apt install postgresql-client
+
 # Install wkhtmltopdf based on QT5
 ADD https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.focal_amd64.deb \
   /opt/sources/wkhtmltox.deb
